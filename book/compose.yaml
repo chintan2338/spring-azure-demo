@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+  redis:
+    image: redis
+    container_name: redis-container
+    ports:
+      - "6379:6379"
+
+  springboot-app:
+    image: your-springboot-image-name
+    container_name: springboot-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - redis
+    environment:
+      SPRING_DATA_REDIS_HOST=redis
+      SPRING_DATA_REDIS_PORT=6379
